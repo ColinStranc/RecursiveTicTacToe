@@ -25,5 +25,10 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
 
             owner = player;
         }
+
+        public override string ToString()
+        {
+            return owner == null ? " " : owner.Symbol;
+        }
     }
 }

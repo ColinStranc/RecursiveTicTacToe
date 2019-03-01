@@ -7,9 +7,9 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
         public int XCoordinate { get { return xCoordinate; }}
         public int YCoordinate { get { return yCoordinate; } }
 
-        private Coordinates subCoordinates;
-        private int xCoordinate;
-        private int yCoordinate;
+        private readonly Coordinates subCoordinates;
+        private readonly int xCoordinate;
+        private readonly int yCoordinate;
 
         public Coordinates(int _x, int _y)
         {
