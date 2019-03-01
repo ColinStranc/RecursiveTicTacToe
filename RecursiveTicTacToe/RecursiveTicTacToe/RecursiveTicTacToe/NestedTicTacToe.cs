@@ -6,10 +6,14 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
 {
     public class NestedTicTacToe
     {
-        public IList<Player> Players { get { return players; }}
+        public IList<Player> Players { get { return players; } }
+        public Player ActivePlayer { get { return activePlayer; } }
+        public int NextX { get { return nextX; } }
+        public int NextY { get { return nextY; } }
 
         private readonly IList<Player> players;
         private readonly TicTacToe board;
+        private readonly IList<Coordinates> history;
 
         private Player activePlayer;
         private int nextX;
@@ -28,19 +32,40 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
             // Force first move to the grid.
             nextX = 1;
             nextY = 1;
+
+            history = new List<Coordinates>();
         }
 
-        public void Move(int x, int y)
+        public bool Move(int x, int y)
         {
+            if (board.Owner != null)
+            {
+                throw new Exception("Cannot make a move when the game is over.");
+            }
+
             Coordinates coordinates = new Coordinates(nextX, nextY,
                                                       new Coordinates(x, y));
 
             board.Set(coordinates, activePlayer);
 
+            history.Add(coordinates);
+
+            if (board.Owner != null)
+            {
+                return true;
+            }
+
             nextX = x;
             nextY = y;
 
             SwapActivePlayer();
+
+            return false;
+        }
+
+        public Player GetWinner()
+        {
+            return board.Owner;
         }
 
         private void SwapActivePlayer()

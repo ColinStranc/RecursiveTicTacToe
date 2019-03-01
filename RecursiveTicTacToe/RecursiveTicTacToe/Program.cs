@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RecursiveTicTacToe.RecursiveTicTacToe;
+using RecursiveTicTacToe.ConsoleNestedTicTacToe;
 
 namespace RecursiveTicTacToe
 {
@@ -10,9 +11,17 @@ namespace RecursiveTicTacToe
         {
             Console.WriteLine("Starting...");
 
-            RunNestedTicTacToe();
+            RunConsoleNestedTicTacToe();
+
+            // RunNestedTicTacToe();
 
             Console.WriteLine("Finished With an Astounding Lack of Errors");
+        }
+
+        static void RunConsoleNestedTicTacToe()
+        {
+            ConsoleTicTacToe cttt = new ConsoleTicTacToe();
+            cttt.Start();
         }
 
         static void RunNestedTicTacToe()

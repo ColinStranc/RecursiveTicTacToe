@@ -7,5 +7,7 @@
 
   <ItemGroup>
     <Folder Include="RecursiveTicTacToe\" />
+    <Folder Include="ConsoleNestedTicTacToe\" />
+    <Folder Include="RecursiveTicTacToe\Exceptions\" />
   </ItemGroup>
 </Project>
