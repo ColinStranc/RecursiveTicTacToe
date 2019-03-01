@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using RecursiveTicTacToe.RecursiveTicTacToe;
+using RecursiveTicTacToe.RecursiveTicTacToe.Exceptions;
 
 namespace RecursiveTicTacToe.ConsoleNestedTicTacToe
 {
@@ -92,7 +93,14 @@ namespace RecursiveTicTacToe.ConsoleNestedTicTacToe
                 return;
             }
 
-            game.Move(newX, newY);
+            try
+            {
+                game.Move(newX, newY);
+            }
+            catch(TicTacToeOwnedException tttoe)
+            {
+                Console.WriteLine(String.Format("That area is already filled by {0}, please try again.", tttoe.OwningPlayer.Name));
+            }
         }
     }
 }

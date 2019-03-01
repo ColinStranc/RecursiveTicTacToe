@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using RecursiveTicTacToe.RecursiveTicTacToe.Exceptions;
+
 namespace RecursiveTicTacToe.RecursiveTicTacToe
 {
     public class TicTacToe : AbstractTicTacToe
@@ -46,9 +48,9 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
 
             AbstractTicTacToe square = GetSquare(coordinates);
 
-            if (square.Owner != null)
+            if (owner != null)
             {
-                throw new Exception("Coordinates already taken");
+                throw new TicTacToeOwnedException(owner, player);
             }
 
             square.Set(coordinates.SubCoordinates, player);

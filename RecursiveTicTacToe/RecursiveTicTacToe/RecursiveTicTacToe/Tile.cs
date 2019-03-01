@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using RecursiveTicTacToe.RecursiveTicTacToe.Exceptions;
 
 namespace RecursiveTicTacToe.RecursiveTicTacToe
 {
@@ -20,7 +21,7 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
 
             if (owner != null)
             {
-                throw new Exception("Tile is already owned.");
+                throw new TicTacToeOwnedException(owner, player);
             }
 
             owner = player;
