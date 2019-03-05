@@ -75,6 +75,11 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
             return GetSquare(coordinates).GCR(coordinates.SubCoordinates);
         }
 
+        public bool SquareOwned(int x, int y)
+        {
+            return GetSquare(x, y).Owner != null;
+        }
+
         private bool Valid(Coordinates coordinates)
         {
             if (coordinates.XCoordinate < 0 || coordinates.YCoordinate < 0)
@@ -93,7 +98,12 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
 
         private AbstractTicTacToe GetSquare(Coordinates coordinates)
         {
-            return squares[coordinates.YCoordinate * DIMENSION + coordinates.XCoordinate]; 
+            return GetSquare(coordinates.XCoordinate, coordinates.YCoordinate); 
+        }
+
+        private AbstractTicTacToe GetSquare(int x, int y)
+        {
+            return squares[y * DIMENSION + x];
         }
 
         private Player FindOwner()

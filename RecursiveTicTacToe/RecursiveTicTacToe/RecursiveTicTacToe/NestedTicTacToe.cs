@@ -29,11 +29,33 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
 
             board = new TicTacToe(players, 2);
 
-            // Force first move to the grid.
-            nextX = 1;
-            nextY = 1;
+            nextX = -1;
+            nextY = -1;
 
             history = new List<Coordinates>();
+        }
+
+        public bool SetMajorGridCoordinates(int x, int y)
+        {
+            if (nextX != -1 && nextY != -1)
+            {
+                return false;
+            }
+
+            if (SubSquareIsOwned(x, y))
+            {
+                return false;
+            }
+
+            nextX = x;
+            nextY = y;
+
+            return true;
+        }
+
+        public bool HasMajorGridCoordinates()
+        {
+            return nextX != -1 && nextY != -1;
         }
 
         public bool Move(int x, int y)
@@ -41,6 +63,11 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
             if (board.Owner != null)
             {
                 throw new Exception("Cannot make a move when the game is over.");
+            }
+
+            if (nextX == -1 || nextY == -1)
+            {
+                throw new Exception("The primary coordinates have not been set.");
             }
 
             Coordinates coordinates = new Coordinates(nextX, nextY,
@@ -55,8 +82,16 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
                 return true;
             }
 
-            nextX = x;
-            nextY = y;
+            if (SubSquareIsOwned(x, y))
+            {
+                nextX = -1;
+                nextY = -1;
+            }
+            else
+            {
+                nextX = x;
+                nextY = y;
+            }
 
             SwapActivePlayer();
 
@@ -71,6 +106,11 @@ namespace RecursiveTicTacToe.RecursiveTicTacToe
         private void SwapActivePlayer()
         {
             activePlayer = players[0] == activePlayer ? players[1] : players[0];
+        }
+
+        private bool SubSquareIsOwned(int x, int y)
+        {
+            return board.SquareOwned(x, y);
         }
 
         public override string ToString()
